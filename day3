@@ -1,0 +1,109 @@
+29/03/2025
+
+AUTO SCALING
+- Search EC2 -> instances -> launch template -> create launch template
+- Give name, provide auto scaling, choose Amazon Linux, instance type: t2.micro, no key pair
+- Create launch template
+- EC2 dashboard
+- Auto scaling grp -> create -> name: apoorva-asg
+- Choose template -> next
+- Select any 3 regions -> next x2 (no change)
+- Health check: 60s.
+- Scaling: desired: 4, min: 1, max: 6 -> next x3.
+- Review: create auto scaling instance.
+
+- Select instance -> actions -> delete.
+
+Download Microsoft Authenticator in mobile.
+- Used for multi-factor authentication
+
+EC2 website -> top corner -> click on security credentials.
+- Assign MFA
+- Device: mobile
+- Authenticator app -> next -> generate QR code -> scan it in mobile.
+- Enter 2 codes -
+-> Logout
+- Login -> enter MFA -> go to security credentials -> remove MFA
+
+SIMPLE STORAGE SERVICE
+
+Storage options in AWS:
+1. Object storage: S3 (Simple Storage Service)
+   - S3 is durable and scalable
+   - S3 is pay-as-you-go
+   - S3 used to upload files/images/movies/pdf files/CSV files/folders etc.
+   - S3 called bucket
+   - S3 bucket size is 5TB, can create each account 100 buckets.
+   - S3 bucket can keep public and also private
+=> When you create an S3 bucket, follow these naming rules:
+- Global unique
+- Min 3 characters and max 63 characters
+- No special characters/no caps/no spaces.
+
+Search S3 ->
+- Create bucket
+- Bucket versioning: enable (to restore)
+
+- Select your bucket -> create folder -> upload images
+
+-> Select 1 image -> copy URL -> paste -> access denied (private)
+
+https://apoorva22.s3.us-east-1.amazonaws.com/images/dp.png
+
+- Convert to public
+
+= Bucket ->
+- Permissions -> deselect block -> close
+- Edit policies -> copy ARN -> AWS policy generator -> policy: s3 -> paste ARN
+
+Delete bucket -> empty and delete.
+
+TERRAFORM::
+
+Open Git Bash
+$ terraform init
+Terraform initialized in an empty directory!
+
+The directory has no Terraform configuration files. You may begin working
+with Terraform immediately by creating Terraform configuration files.
+
+$ touch apoorva.tf
+
+$ terraform init
+
+UKH@Desktop-APOORVA MINGW64 ~ (master)
+$ terraform validate
+Success! The configuration is valid.
+
+> nano apoorva.tf => terraform will give code
+
+<paste it>
+provider "aws" { region = "ap-south-1" }
+resource "aws_s3_bucket" "my_bucket" { bucket = "" acl = "private" }
+
+Ctrl x then y and enter.
+
+--------------------------------------------------------------
+
+2. Block Storage: EBS (Elastic Block Storage)
+3. File Storage: EFS (Elastic File System)
+
+
+DOCKER - Uses to break monolithic architecture to microservices.
+
+- Monolithic architecture (having multiple microservices) connected to-> server
+
+Go to EC2 on website ->
+
+1. Create Amazon Linux instance => connect
+2. sudo su, yum update, yum install docker -y,
+3. docker --version
+4. service start docker
+5. docker info
+6. docker pull ubuntu
+7. docker run redis
+8. docker ps -a (to show collections of containers: all?)
+   > docker ps (running container)
+   > docker images
+9. docker run alpine
+

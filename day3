@@ -107,3 +107,173 @@ Go to EC2 on website ->
    > docker images
 9. docker run alpine
 
+
+
+------------------------------------------------------------------------------------------------------------------
+
+What is Kubernetes?
+Open-source container orchestration platform used to automate the deployment, scaling, and management of containerized applications.
+
+=> A container orchestration tool that manages and scales containerized applications.
+=> Automates deployment, scaling, and management of containerized applications across multiple servers.
+
+=> Kubernetes can use Docker as a container runtime.
+What are components of K8s?
+
+Control Plane (Master Node) Components:
+
+These components manage and control the cluster.
+
+API Server (kube-apiserver):
+
+Acts as the frontend for Kubernetes.
+
+Exposes the Kubernetes API and handles requests from kubectl, CLI, and UI.
+
+Validates requests and forwards them to relevant components.
+
+etcd (Database):
+
+A key-value store that stores all cluster data.
+
+Stores configuration, status, and metadata of the cluster.
+
+Scheduler (kube-scheduler):
+
+Assigns workloads (pods) to worker nodes.
+
+Evaluates node resources (CPU, memory, etc.) and ensures efficient scheduling.
+
+Worker Node Components:
+
+These components handle application workloads.
+
+Kubelet:
+
+An agent running on each worker node.
+
+Communicates with the API server and ensures the assigned pods are running correctly.
+
+Manages pod lifecycle.
+
+Kube-Proxy:
+
+Manages network communication inside the cluster.
+
+Ensures proper routing of network traffic between pods.
+
+Container Runtime (Docker, containerd, CRI-O, etc.):
+
+Runs containerized applications inside the pods.
+
+Kubernetes supports multiple container runtimes.
+
+What is a cluster?
+A cluster is a group of servers, which contains master nodes and worker nodes.
+DevOps engineer/developer can manage it.
+The master node manages the worker nodes, assigning tasks to them.
+Using a cluster ensures high availability (if one server is not available, another will take over).
+
+etcd (Database):
+
+A key-value store that stores all cluster data.
+
+Stores configuration, status, and metadata of the cluster.
+
+Kubelet:
+
+An agent that runs on each worker node in a Kubernetes cluster.
+
+Ensures the containers inside pods are running as expected.
+
+Kube-Proxy:
+
+Handles networking between clusters (master node <--> worker node).
+
+Pods:
+
+The smallest deployable unit in Kubernetes.
+
+Can contain one or multiple containers that share networking and storage.
+
+Runs applications inside worker nodes.
+
+Kube Scheduler:
+
+Assigns pods to worker nodes based on resource availability.
+
+========================================
+
+Go to the website => Elastic Kubernetes Service => Cluster -> Create cluster -> Give cluster name -> Custom configuration -> Version: standard -> Amazon EBS CSI Controller.
+
+Creating Master Node:
+
+Go inside your cluster.
+
+Add-ons -> You can see the number of pods.
+
+Compute ->
+
+EC2 Instance:
+Launch instance -> Apoorva-masternode -> Amazon Linux -> No key pair -> Network settings: Select existing = default -> Advanced details: IAM instance profile: select yours -> Launch instance.
+
+Created master node -> Click on blank instances -> Security -> Check security groups -> Copy-paste instance ID -> Rename (worker group x2).
+
+Connect to master node.
+
+Install kubectl using the following command:
+
+bash
+Copy
+Edit
+curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.24.11/2023-03-17/bin/linux/amd64/kubectl  
+chmod +x ./kubectl  
+sudo cp ./kubectl /usr/local/bin  
+export PATH=/usr/local/bin:$PATH  
+Check kubectl version:
+
+bash
+Copy
+Edit
+kubectl version  
+Install AWS CLI:
+
+bash
+Copy
+Edit
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"  
+unzip awscliv2.zip  
+sudo ./aws/install  
+Install Git:
+
+bash
+Copy
+Edit
+sudo yum install git -y  
+Clone the Git repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/N4si/K8s-voting-app.git  
+Step 4: Add-ons EBS CSI Driver under EKS cluster.
+
+Step 5:
+Creating node groups (node1 and node2) under EKS cluster (masternode).
+IAM role under nodegroup is:
+Use case: EC2
+
+AmazonEC2ContainerRegistryReadOnly
+
+AmazonEKS_CNI_Policy
+
+AmazonEKSWorkerNodePolicy
+
+AmazonEBSCSIDriverPolicy
+
+Ex: EKS Node role
+
+bash
+Copy
+Edit
+

@@ -1,0 +1,121 @@
+03/04/2025 - Jenkins  
+- Connect to your instance  
+- Get administrator password: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`  
+- Install suggested plugins  
+- Create 1st admin account:  
+- Username: un  
+- Password: Uname@1234  
+- Email: email@gmail.com  
+- Save and continue x2  
+http://107.21.155.134:8080/  
+Creating 1st Job in Jenkins:  
+- Manage Jenkins -> Plugins -> Available plugins ->  
+- Dashboard -> Tools ->  
+- New item => JOB-01 => scroll down => Build steps => Execute shell => paste command =>  
+echo "Hello Guys, "  
+touch it.txt  
+echo "Hello Guys, Welcome to Jenkins Classes" >> it.txt  
+echo "Done..!!"  
+=> Apply and save.  
+=> Build now.  
+=> Arrow -> Console output => copy "/var/lib/jenkins/workspace/JOB-01"  
+=> Go to server => refresh  
+=> cd /var/lib/jenkins/workspace/JOB-01  
+>sudo su  
+> nano demo.sh  
+
+#!/bin/bash (path)  
+
+mkdir n1  
+cd n1  
+touch f1  
+echo "Hello Guys" > f1  
+
+Ctrl + x, y, enter  
+
+>> bash demo.sh  
+>> ls  
+Jenkins job with GitHub Repo + Maven Integration  
+
+- Go to Jenkins dashboard -> sign in -> manage -> plugins -> available -> maven integration -> install  
+- Manage Jenkins -> Tools -> Git (install automatically) -> Maven (MAVEN_HOME) install automatically. Save.  
+  
+=> Create JOB-02 (free style job)  
+
+
+1. Jenkins dashboard -> Manage Jenkins -> Manage plugins -> Go to Available tab -> Search for "Deploy to container" plugin -> Install without restart.  
+2. Go to EC2 => Launch instance => Tomcat-Apoorva => Ubuntu =>  
+- Allow rules: SSH, HTTP, HTTPS, TCP port 8080 (anywhere)  
+- New Tomcat-Apoorva instance connected => sudo apt-get update  
+
+-> Tomcat download in Google => 1st link => Source code: tar.gz => Copy link address  
+
+>> wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/src/apache-tomcat-9.0.102-src.tar.gz  
+---Extract----  
+
+Install Java in Jenkins server:  
+
+In Tomcat-Apoorva =>  
+
+sudo apt-get update  
+sudo apt install openjdk-17-jdk  
+sudo apt-get install default-jre  
+sudo apt install fontconfig openjdk-17-jre  
+
+ls -l  
+
+sudo apt-get update  
+sudo apt install openjdk-17-jdk  
+sudo apt-get install default-jre  
+sudo apt install fontconfig openjdk-17-jre  
+ls -l  
+cd apache-tomcat-9.0.102-src  
+ls  
+cd webapps  
+ls -l  
+cd manager  
+ls  
+cd META-INF  
+cd META-INF  
+ls  
+nano context.xml  
+history  
+
+
+Edit context.xml  
+
+Remove IP address and put allow=".*"  
+cd ../../..  
+Conf/Tomcat  
+<tomcat-users>  
+    <role rolename="admin-gui"/>  
+    <role rolename="manager-gui"/>  
+    <role rolename="manager-script"/>  
+    <role rolename="manager-jmx"/>  
+    <role rolename="manager-status"/>  
+    <user username="admin" password="admin" roles="admin-gui,manager-gui,manager-script,manager-jmx,manager-status"/>  
+</tomcat-users>  
+
+Go to bin directory =>  
+>> bash startup.sh  
+2. Create Jenkins Job: JOB-03  
+- Free style -> Jenkins job with Git repo + Maven + Tomcat server ->  
+- Source git repo: https://github.com/ashokitschool/JAVA-MAVEN-WEB-APP.git  
+- Cross-check branch  
+- Add build steps: Invoke top-level Maven target  
+- Maven => Goal: clean package  
+- Post-build Actions: Deploy WAR/EAR to a container  
+In bin dir of Tomcat-Apoorva => maybe not needed this  
+
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.102/bin/apache-tomcat-9.0.102.tar.gz  
+tar -xzvf apache-tomcat-9.0.102.tar.gz  
+cd apache-tomcat-9.0.102/bin  
+./catalina.sh start  
+Copy public IP => http://54.210.160.113:8080 => Apache Tomcat/9.0.102  
+Go to Jenkins Job3 => At the end =>  
+
+maven-web-app.war  
+Context path: target  
+Containers: Tomcat 9.x Remote  
+Credentials: admin, admin, Tomcat-Server-Credentials, Tomcat-Server-Credentials, Ok.  
+Tomcat URL: http://54.210.160.113:8080/  

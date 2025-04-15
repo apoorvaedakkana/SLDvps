@@ -1,0 +1,56 @@
+27/03/2025 - DevOps  
+terraform, Jenkins, docker, kubernetes & installations, ansible, nagios  
+OS - The interface between hardware and software.  
+cloud computing - It is the on-demand delivery of IT resources over the internet. You can access technical resources such as storage, databases, compute, networking, and security with pay-as-you-go pricing.  
+Cloud Providers - AWS, Microsoft Azure, Google Cloud Platform  
+SDLC - Software Development Life Cycle is a structured process used by development teams to create high-quality, cost-effective, and secure software.  
+Waterfall Model, Agile methodology  
+Applications to download - mobaXterm (free, installer edition), AWS console login  
+Components of Server - OS (Linux/win/mac), RAM (6/8/12/16 GB), ROM (HDD/SSD), Networking, EC2 (Amazon Elastic Compute Cloud)  
+Commands -  
+sudo su  
+ls lists all the files and directories  
+touch creates empty files (e.g., touch newfile)  
+cat > newfile writes content into newfile  
+clear clears the screen  
+cat newfile reads the content in the file  
+rm newfile removes the file  
+mkdir dir1 creates an empty directory  
+cd dir1 changes the directory  
+cd .. exits from the directory  
+rmdir deletes an empty directory  
+rm -r deletes a directory with files  
+ls -l lists files with permissions  
+pwd prints the present working directory  
+history shows a list of previously executed commands  
+cd ../.. comes out of two directories together  
+DevOps - A set of practices, principles, and cultural philosophies designed to bridge the gap between software development and operations. The goal of DevOps is to shorten the SDLC, improve collaboration, and deliver high-quality software faster and more efficiently.  
+Key elements include automation, CI (Continuous Integration), CD (Continuous Development/Deployment), collaboration/communication, and monitoring.  
+Waterfall Model - It has distinct goals for each phase: Requirements, Analysis, Design, Coding, Testing, Operations. Limitations include the difficulty of going back to the concept stage after an application enters the testing phase.  
+Agile Methodology - DevOps is a culture that fosters collaboration among all participants in the development and maintenance of software. Agile methodology is designed to maintain productivity and drive releases, even with changing needs.  
+The cycle includes Plan, Design, Develop, Test, Deploy, Review, and Launch.  
+CI - Continuous development (plan, code), Continuous Testing (build, test), Continuous Deployment (release, deploy), Continuous Monitoring (operate, monitor)  
+EC2 - Elastic Compute Cloud  
+Server - A system that provides services or data to other systems, known as clients. Servers manage, store, and process data, handling requests and delivering responses within a network.  
+Types of servers include web servers (e.g., Nginx), file servers, database servers (e.g., MySQL, MongoDB), and mail servers (e.g., Microsoft Exchange).  
+EC2 Configuration -  
+1. Launch an instance  
+2. Name the server  
+3. Select an Application & OS Image (Amazon Machine Image)  
+4. Choose Windows OS, select the instance type with at least 16GB RAM for high speed  
+5. Name the Key Pair (RSA, .pem) for secure connection  
+6. Configure Networking with firewalls, VPC (Virtual Private Cloud), subnets, route tables, NAT, Internet Gateway, and Elastic IPs  
+7. Configure storage using EBS (Elastic Block Store), which is similar to a hard disk and supports persistent block-level storage.  
+Connecting to Instance -  
+1. Use an RDP client to download the remote desktop file and get the password.  
+2. In Git Bash, use the command ssh ec2@<instance_ip>  
+3. To send files from the server to a GitHub repository:  
+   sudo yum update  
+   sudo yum install git -y  
+   touch file  
+   sudo su  
+   git init  
+   git add .  
+   git commit  
+   git remote add origin <repo_url>  
+   git push origin master
